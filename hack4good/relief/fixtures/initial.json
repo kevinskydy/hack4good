@@ -1,0 +1,16 @@
+[
+  {
+    "model": "relief.itemtype",
+      "pk": 1,
+      "fields": {
+        "name": "Food"
+      }
+  }, 
+  {
+    "model": "relief.itemtype",
+      "pk": 2,
+      "fields": {
+        "name": "Clothing"
+      }
+  }
+]

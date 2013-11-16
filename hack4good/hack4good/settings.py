@@ -74,7 +74,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-print "LOLOLOL"
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates')    
+)
 
 try:
     from localsettings import *
