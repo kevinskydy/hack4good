@@ -5,8 +5,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'hack4good',
-        'USER': 'postgres', 
-        'PASSWORD': 'pa55w0rd', 
+        'USER': 'root', 
+        'PASSWORD': 'raymond', 
         'PORT': 5432
         'HOST': 'localhost'
     }

@@ -19,7 +19,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'ReliefCenter.cause'
         db.add_column(u'relief_reliefcenter', 'cause',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['relief.Cause']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['relief.Cause']),
                       keep_default=False)
 
         # Adding field 'ReliefCenter.name'
@@ -39,7 +39,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'Goal.relief_center'
         db.add_column(u'relief_goal', 'relief_center',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['relief.ReliefCenter']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['relief.ReliefCenter']),
                       keep_default=False)
 
         # Adding field 'Goal.target_date'
@@ -64,17 +64,17 @@ class Migration(SchemaMigration):
 
         # Adding field 'Item.goal'
         db.add_column(u'relief_item', 'goal',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['relief.Goal']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['relief.Goal']),
                       keep_default=False)
 
         # Adding field 'Item.item_type'
         db.add_column(u'relief_item', 'item_type',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['relief.ItemType']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['relief.ItemType']),
                       keep_default=False)
 
         # Adding field 'Item.quota'
         db.add_column(u'relief_item', 'quota',
-                      self.gf('django.db.models.fields.IntegerField')(default=0),
+                      self.gf('django.db.models.fields.IntegerField')(default=1),
                       keep_default=False)
 
 

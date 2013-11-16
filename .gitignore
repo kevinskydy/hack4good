@@ -1,3 +1,6 @@
 *.pyc
 static/
 localsettings.py
+activate
+venv/
+.vagrant/
