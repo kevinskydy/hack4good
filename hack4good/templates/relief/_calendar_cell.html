@@ -1,0 +1,9 @@
+{% load relief_helpers %}
+{% spaceless %}
+  {% for item in goal.items.all %}
+    <div class='progress'>
+      <div class='bar' style='width: {{ item.percent_complete }}%;'></div>
+      {{ item.get_total_delivered }} / {{ item.quota }}
+    </div>
+  {% endfor %}
+{% endspaceless %}

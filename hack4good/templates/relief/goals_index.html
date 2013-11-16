@@ -4,19 +4,22 @@
 {% block extra_css %}
   <link type='text/css' rel='stylesheet' href='{% static "Calendario/css/calendar.css" %}' >
   <link type='text/css' rel='stylesheet' href='{% static "Calendario/css/custom_1.css" %}' >
+  <link type='text/css' rel='stylesheet' href='{% static "css/goals.css" %}' >
 {% endblock extra_css %}
 
 {% block extra_js %}
   <script type='text/javascript' src='{% static "Calendario/js/jquery.calendario.js" %}'></script>
   <script type='text/javascript'>
+    {% autoescape off %}
     $(function () {
-      $('#calendar').calendario();
+      $('#calendar').calendario({
+        caldata: {{ ctr.get_calendar_data }}
+      });
     });
+    {% endautoescape %}
   </script>
 {% endblock extra_js %}
 
 {% block container %}
-  <div id='calendar'>
-  </div>
-  {{ goals }}
+  <div id='calendar'></div>
 {% endblock container %}

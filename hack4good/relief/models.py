@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import simplejson
+from django.template.loader import render_to_string
 from datetime import date, datetime, timedelta
 
 # Create your models here.
@@ -17,11 +19,18 @@ class ReliefCenter(models.Model):
 	latitude = models.FloatField(blank=True, null=True)
 	contact_info = models.TextField(blank=True, null=True)
 
+	def get_calendar_data(self):
+		data = [(
+				goal.target_date.strftime('%m-%d-%Y'), 
+				str(render_to_string("relief/_calendar_cell.html", { 'goal': goal }))
+			) for goal in self.goals.all() ]
+		return dict(data)
+
 	def __unicode__(self):
 		return "%s" % (self.name)
 
 class Goal(models.Model):
-	relief_center = models.ForeignKey('ReliefCenter')
+	relief_center = models.ForeignKey('ReliefCenter', related_name='goals')
 	target_date = models.DateField(default=date.today())
 
 	@property
@@ -46,18 +55,24 @@ class Delivery(models.Model):
 
 class ItemType(models.Model):
 	name = models.CharField(max_length=32, default='ItemType Name')
+	#border_color = models.CharField(max_length=7, default="#849E62")
+	#fill_color = models.CharField(max_length=7, default="#DFF0D8")
 
 	def __unicode__(self):
 		return "%s" % (self.name)
 
 class Item(models.Model):
-	goal = models.ForeignKey('Goal')
+	goal = models.ForeignKey('Goal', related_name='items')
 	item_type = models.ForeignKey('ItemType')
 	quota = models.IntegerField(default=0)
 
 	@property
 	def get_total_delivered(self):
 		return reduce(lambda d, total: d + total, self.deliveries.all().values_list('quantity', flat=True), 0)
+
+	@property
+	def percent_complete(self):
+		return 100.0 * (float(self.get_total_delivered) / float(self.quota))
 
 	@property
 	def get_is_complete(self):

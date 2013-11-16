@@ -1,0 +1,17 @@
+.progress {
+	position: relative;
+	border-style: dashed;
+	border-width: 1px;
+	border-color: rgb(132,158,98);
+	background: rgba(132,158,98,0.3);
+	margin: 0px auto;
+	text-align: center;
+}
+
+.progress .bar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	background-color: rgb(132,158,98);
+}
