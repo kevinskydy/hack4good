@@ -1,0 +1,47 @@
+[
+  {
+    "model": "relief.cause",
+      "pk": 1,
+      "fields": {
+        "name": "Yolanda"
+      }
+  }, 
+  {
+    "model": "relief.reliefcenter",
+      "pk": 1,
+      "fields": {
+        "cause": 1, 
+        "name": "Tacloban RLF 01"
+      }
+  }, 
+  {
+    "model": "relief.itemtype",
+      "pk": 1,
+      "fields": {
+        "name": "Food"
+      }
+  }, 
+  {
+    "model": "relief.itemtype",
+      "pk": 2,
+      "fields": {
+        "name": "Clothing"
+      }
+  }, 
+  {
+    "model": "relief.goal",
+      "pk": 1,
+      "fields": {
+        "relief_center": 1
+      }
+  }, 
+  {
+    "model": "relief.item",
+      "pk": 1,
+      "fields": {
+        "goal": 1, 
+        "item_type": 2, 
+        "quota": 100
+      }
+  }
+]
