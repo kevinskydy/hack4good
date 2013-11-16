@@ -4,8 +4,8 @@
 <html>
   <head>
     <title>{% block page_title %}Aid Efficiently{% endblock page_title %}</title>
-
     <link type='text/css' rel='stylesheet' href='{% static "bootstrap/css/bootstrap.min.css" %}' />
+    <link type='text/css' rel='stylesheet' href='{% static "bootstrap/css/bootstrap-theme.min.css" %}' />
 
     <script type='text/javascript' src='{% static "js/jquery-1.10.2.min.js" %}'></script>
     <script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}'></script>
@@ -16,8 +16,25 @@
     </script>
   </head>
   <body>
-    {% block body %}
-      Base.html
-    {% endblock body %}
+    <header>
+      <nav class='navbar navbar-default'>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <h1 id='logo'>
+            <a class="navbar-brand" href="#">AidEfficiently</a>
+          </h1>
+        </div>
+      </nav>
+    </header>
+    <section class='container'>
+      {% block container %}
+        Base.html
+      {% endblock container %}
+    </section>
   </body>
 </html>
