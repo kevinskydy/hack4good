@@ -46,7 +46,7 @@ class Goal(models.Model):
 	@property
 	def get_is_complete(self):
 		items = self.items.all()
-		return len(items) > 0 and reduce(lambda i, complete: i.get_is_complete() and complete, items, True)
+		return reduce(lambda i, complete: i.get_is_complete and complete, items)
 
 	def __unicode__(self):
 		return "%s: %s" % (self.relief_center, self.target_date)
