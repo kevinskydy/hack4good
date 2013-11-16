@@ -8,6 +8,7 @@
 	border-style: dashed;
 	border-width: 1px;
 	border-color: rgb(132,158,98);
+	margin: 0px 0px 4px 0px;
 	background: rgba(132,158,98,0.3);
 	text-align: center;
 }
