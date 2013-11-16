@@ -1,5 +1,4 @@
 from django.db import models
-
 from datetime import date, datetime
 
 # Create your models here.
@@ -23,6 +22,10 @@ class ReliefCenter(models.Model):
 class Goal(models.Model):
 	relief_center = models.ForeignKey('ReliefCenter')
 	target_date = models.DateField(default=date.today())
+
+	@property
+	def get_remaining_time(self):
+		return datetime.now() - target_date
 
 	def __unicode__(self):
 		return "%s: %s" % (self.relief_center, self.target_date)
@@ -48,6 +51,14 @@ class Item(models.Model):
 	goal = models.ForeignKey('Goal')
 	item_type = models.ForeignKey('ItemType')
 	quota = models.IntegerField(default=0)
+
+	# @property
+	def get_total_delivered(self):
+		return reduce(lambda d, total: d.quantity + total, self.delivery_set.all, 0)
+
+	@property
+	def get_is_complete(self):
+		return self.total_delivered == quota
 
 	def __unicode__(self):
 		return "%s: %s - %d" % (self.goal, self.item_type, self.quota)

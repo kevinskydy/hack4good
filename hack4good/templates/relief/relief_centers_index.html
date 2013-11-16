@@ -5,27 +5,47 @@ Causes
 {% endblock page_sub_title %}
 
 {% block container %}
+	<div>
+		<h1>{{ cause.name }}</h1>
+	</div>
+	{% for ctr in centers %}
 	<div class='row'>
-		{% for ctr in centers %}
-		<div class='col-xs-12'>
+		<div class='col-md-6'>
 			<div>
 				<div>
 					<h3><a href='{% url "goal_index" ctr.id %}'>
 						{{ ctr.name }}
-					</a></h3>
-				</div>
-				<div>	
-					Coordinates: {{ ctr.longitude }}, {{ ctr.latitude }}
-				</div>
-				<div>
-					Goals: 
-					{% for goal in ctr.goal_set.all %}
-						<h4>{{ goal.target_date }}</h4>
-					{% endfor %}
-				</div>
+					</a>
+				</h3>
 			</div>
-			<hr />
+			<div>	
+				Coordinates: {{ ctr.longitude }}, {{ ctr.latitude }}
+			</div>
+			<div>
+				Contact Details: TODO
+			</div>
+			<br />
+			<div>
+				Time Remaining: TODO{{ goal.remaining_time }}
+			</div>
+			<div>
+				<h4>Goals</h4> 
+				{% for goal in ctr.goal_set.all %}
+					<h5>{{ goal.target_date }}</h5>
+					Items:
+					<ul>
+					{% for item in goal.item_set.all %}
+						<li>
+							{{ item.item_type.name }} - <strong>TODO{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</li>
+					{% endfor %}
+					</ul>
+					<br />
+				{% endfor %}
+			</div>
 		</div>
-		{% endfor %}
+		<div class="col-md-6">
+			FB Comments: TODO
+		</div>
   </div>
+	{% endfor %}	
 {% endblock container %}
