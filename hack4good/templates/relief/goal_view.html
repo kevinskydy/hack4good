@@ -23,7 +23,8 @@
 	</h2>
 </div>
 <div class="row">
-	<div class="fb-share-button" data-href="{{ base_url }}{% url "goal_view" goal.id %}" data-type="button_count"></div>
+	{# <div class="fb-share-button" data-href="{{ base_url }}{% url "goal_view" goal.id %}" data-type="button_count"></div> #}
+	<div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-type="button_count"></div>
 </div>
 <div class="row">
 	<h3>Items Needed</h3>
@@ -60,4 +61,15 @@
 		</tbody>
 	</table>
 </div>
+<div class="row">
+	<div class="fb-comments" data-href="{{ base_url }}{% url "goal_view" goal.id %}" data-numposts="10"></div>
+</div>
+<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=369124419889540";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 {% endblock container %}
