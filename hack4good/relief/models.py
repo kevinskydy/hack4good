@@ -26,6 +26,10 @@ class ReliefCenter(models.Model):
 			) for goal in self.goals.all() ]
 		return dict(data)
 
+	@property
+	def get_pending_goals(self):
+		return [goal for goal in self.goals.all() if goal.target_date >= date.today()]
+
 	def __unicode__(self):
 		return "%s" % (self.name)
 
@@ -36,8 +40,12 @@ class Goal(models.Model):
 	@property
 	def get_remaining_time(self):
 		remaining = datetime(year=self.target_date.year, month=self.target_date.month, day=self.target_date.day) - datetime.now()
-
 		return remaining if remaining > timedelta(0) else timedelta(0)
+
+	@property
+	def get_is_complete(self):
+		items = self.items.all()
+		return len(items) > 0 and reduce(lambda i, complete: i.get_is_complete() and complete, items, True)
 
 	def __unicode__(self):
 		return "%s: %s" % (self.relief_center, self.target_date)
@@ -76,7 +84,7 @@ class Item(models.Model):
 
 	@property
 	def get_is_complete(self):
-		return self.total_delivered == quota
+		return self.get_total_delivered() == self.quota
 
 	def __unicode__(self):
 		return "%s: %s - %d" % (self.goal, self.item_type, self.quota)

@@ -20,8 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'zlve1z!7s9=iqt@fv#=ga3-@gpy%o6%p9@)btk#^b7^=ds8j=%'
-# SITE_URL = 'http://localhost:8080'
-# set_script_prefix(SITE_URL)
+BASE_URL = 'http://localhost:8080'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

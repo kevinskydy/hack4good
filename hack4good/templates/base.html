@@ -6,7 +6,12 @@
     <title>{% block page_title %}Aid Efficiently{% endblock page_title %} | {% block page_sub_title %}Sub Title{% endblock page_sub_title%}</title>
     <link type='text/css' rel='stylesheet' href='{% static "bootstrap/css/bootstrap.min.css" %}' />
     <link type='text/css' rel='stylesheet' href='{% static "bootstrap/css/bootstrap-theme.min.css" %}' />
-    {% block extra_css %}{% endblock extra_css %}
+    {% block extra_css %}
+    <style type="text/css">
+    .red { color: red; }
+    .green { color: green; }
+    </style>
+    {% endblock extra_css %}
 
     <script type='text/javascript' src='{% static "js/jquery-1.10.2.min.js" %}'></script>
     <script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}'></script>
@@ -30,7 +35,7 @@
             <span class="icon-bar"></span>
           </button>
           <h1 id='logo'>
-            <a class="navbar-brand" href="{% url 'cause_index' %}">AidEfficiently</a>
+            <a class="navbar-brand" href="{% url 'cause_index' %}">Aid Efficiently</a>
           </h1>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

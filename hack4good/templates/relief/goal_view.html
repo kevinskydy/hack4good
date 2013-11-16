@@ -1,0 +1,63 @@
+{% extends 'relief/base.html' %}
+
+{% block page_sub_title %}
+{{ goal.relief_center.cause.name }} - {{ goal.relief_center.name }} - {{ goal.target_date }}
+{% endblock page_sub_title %}
+
+{% block container %}
+<div class="row">
+	<h1>
+		<a href="{% url "relief_center_index" goal.relief_center.cause.id %}">
+			{{ goal.relief_center.cause.name }}
+		</a>
+	 - {{ goal.relief_center.name }}</h1>
+</div>
+<div class="row">
+	<h2>
+		{{ goal.target_date }} - 
+		{% if goal.get_is_complete %}
+			<span class="green">Complete</span>
+		{% else %}
+			<span class="red">Incomplete</span>
+		{% endif %}
+	</h2>
+</div>
+<div class="row">
+	<div class="fb-share-button" data-href="{{ base_url }}{% url "goal_view" goal.id %}" data-type="button_count"></div>
+</div>
+<div class="row">
+	<h3>Items Needed</h3>
+</div>
+<div class="row">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>	
+				<th>Delivered</th>
+				<th>Quota</th>
+				<th>Complete</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for item in goal.items.all %}
+			{% if item.get_is_complete %}
+			<tr class="green">
+			{% else %}
+			<tr class="red">
+			{% endif %}
+				<td>{{ item.item_type.name }}</td>
+				<td>{{ item.get_total_delivered }}</td>
+				<td>{{ item.quota }}</td>
+				<td>
+					{% if item.get_is_complete %}
+						<span class="glyphicon glyphicon-ok"></span>
+					{% else %}
+						<span class="glyphicon glyphicon-remove"></span>
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock container %}

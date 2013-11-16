@@ -6,7 +6,7 @@ Causes
 
 {% block container %}
 	<div class="row">
-		<h1>{{ cause.name }}</h1>
+		<h1>{{ cause.name }} - Relief Centers</h1>
 	</div>
 	<hr />
 	{% for ctr in centers %}
@@ -28,25 +28,33 @@ Causes
 			<br />
 			<div>
 				<h4>Goals</h4> 
-				{% for goal in ctr.goal_set.all %}
-					<h5>{{ goal.target_date }}</h5>
+				{% for goal in ctr.get_pending_goals|slice:":1" %}
+					<h5>
+						<a href="{% url "goal_view" goal.id %}">
+							{{ goal.target_date }}
+						</a> - 
+						{% if goal.get_is_complete %}
+						<span class="green">Complete</span>
+					{% else %}
+						<span class="red">Incomplete</span>
+					{% endif %}
+					</h5>
 					<div>
 						Time Remaining: {{ goal.get_remaining_time }}
 					</div>
-					Items:
+					Items Needed:
 					<ul>
-					{% for item in goal.item_set.all %}
+					{% for item in goal.items.all %}
 						<li>
 							{{ item.item_type.name }} - <strong>{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</li>
 					{% endfor %}
 					</ul>
-					 <div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-type="button_count"></div>
-					<br />
+					<div class="fb-share-button" data-href="{{ base_url }}{% url "goal_view" goal.id %}" data-type="button_count"></div>
 				{% endfor %}
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="fb-comments" data-href="{{ request.get_host }}{% url "goal_index" ctr.id %}" data-numposts="10"></div>
+			<div class="fb-comments" data-href="{{ base_url }}{% url "goal_index" ctr.id %}" data-numposts="10"></div>
 		</div>
   </div>
 	<hr />	
