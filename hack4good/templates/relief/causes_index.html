@@ -1,5 +1,31 @@
 {% extends 'relief/base.html' %}
 
-{% block body %}
-	{{ causes }}
-{% endblock body %}
+{% block page_sub_title %}
+Causes
+{% endblock page_sub_title %}
+
+{% block container %}
+	<div class='row'>
+		<div class='col-xs-4'>
+			Logo
+		</div>
+		<div class='col-xs-4'>
+			Select Cause	
+		</div>
+		<div class='col-xs-4'>
+			Login
+		</div>
+	</div>
+	<div class='row'>
+		{% for cause in causes %}
+		<div class='col-xs-4'>
+			<h2>
+				<!-- TODO: Generate url properly! -->
+				<a href='/relief/relief_centers/{{ cause.id }}'>
+					{{ cause.name }}
+				</a>
+			</h2>
+		</div>
+		{% endfor %}
+  </div>
+{% endblock container %}
