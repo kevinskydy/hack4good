@@ -26,9 +26,21 @@
             <span class="icon-bar"></span>
           </button>
           <h1 id='logo'>
-            <a class="navbar-brand" href="#">AidEfficiently</a>
+            <a class="navbar-brand" href="{% url 'cause_index' %}">AidEfficiently</a>
           </h1>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              {% if request.user.is_authenticated %}
+                Hi, {{ request.user }}!
+                <a href="{% url 'accounts_logout' %}?next=/">Logout</a>
+              {% else %}
+                <a href="{% url 'accounts_login' %}">Login</a>
+              {% endif %}
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
       </nav>
     </header>
     <section class='container'>
