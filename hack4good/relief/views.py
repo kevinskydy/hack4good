@@ -28,7 +28,7 @@ class GoalsIndexView(View):
 	def get(self, request, *args, **kwargs):
 		ctr = ReliefCenter.objects.get(id=kwargs['ctr_id'])
 		return render(request, 'relief/goals_index.html', {
-			'goals': ctr.goals.all()
+			'ctr': ctr
 		})
 
 class GoalView(View):

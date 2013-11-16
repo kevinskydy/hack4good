@@ -19,6 +19,7 @@ class ReliefCenter(models.Model):
 	latitude = models.FloatField(blank=True, null=True)
 	contact_info = models.TextField(blank=True, null=True)
 
+	@property
 	def get_calendar_data(self):
 		data = [(
 				goal.target_date.strftime('%m-%d-%Y'), 
