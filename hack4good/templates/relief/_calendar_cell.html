@@ -5,7 +5,7 @@
       {{ item.item_type }}
       <div class='progress'>
         <div class='bar' style='width: {{ item.percent_complete }}%;'></div>
-        {{ item.get_total_delivered }} / {{ item.quota }}
+        <div class='text'>{{ item.get_total_delivered }} / {{ item.quota }}</div>
       </div>
     </div>
   {% endfor %}
