@@ -5,28 +5,28 @@ Causes
 {% endblock page_sub_title %}
 
 {% block container %}
-	<div>
+	<div class="row">
 		<h1>{{ cause.name }}</h1>
 	</div>
 	{% for ctr in centers %}
 	<div class='row'>
 		<div class='col-md-6'>
 			<div>
-				<div>
-					<h3><a href='{% url "goal_index" ctr.id %}'>
+				<h3>
+					<a href='{% url "goal_index" ctr.id %}'>
 						{{ ctr.name }}
 					</a>
 				</h3>
 			</div>
 			<div>	
-				Coordinates: {{ ctr.longitude }}, {{ ctr.latitude }}
+			Coordinates: {{ ctr.longitude }}, {{ ctr.latitude }}
 			</div>
 			<div>
-				Contact Details: TODO
+			Contact Details: TODO
 			</div>
 			<br />
 			<div>
-				Time Remaining: TODO{{ goal.remaining_time }}
+			Time Remaining: TODO{{ goal.remaining_time }}
 			</div>
 			<div>
 				<h4>Goals</h4> 
