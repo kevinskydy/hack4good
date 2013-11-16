@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 # Create your models here.
 
@@ -15,6 +15,7 @@ class ReliefCenter(models.Model):
 	name = models.CharField(max_length=64, default='ReliefCenter Name')
 	longitude = models.FloatField(blank=True, null=True)
 	latitude = models.FloatField(blank=True, null=True)
+	contact_info = models.TextField(blank=True, null=True)
 
 	def __unicode__(self):
 		return "%s" % (self.name)
@@ -25,13 +26,15 @@ class Goal(models.Model):
 
 	@property
 	def get_remaining_time(self):
-		return datetime.now() - target_date
+		remaining = datetime(year=self.target_date.year, month=self.target_date.month, day=self.target_date.day) - datetime.now()
+
+		return remaining if remaining > timedelta(0) else timedelta(0)
 
 	def __unicode__(self):
 		return "%s: %s" % (self.relief_center, self.target_date)
 
 class Delivery(models.Model):
-	item = models.ForeignKey('Item')
+	item = models.ForeignKey('Item', related_name='deliveries')
 	quantity = models.IntegerField()
 	arrival_date = models.DateTimeField(auto_now_add=True)
 
@@ -52,9 +55,9 @@ class Item(models.Model):
 	item_type = models.ForeignKey('ItemType')
 	quota = models.IntegerField(default=0)
 
-	# @property
+	@property
 	def get_total_delivered(self):
-		return reduce(lambda d, total: d.quantity + total, self.delivery_set.all, 0)
+		return reduce(lambda d, total: d + total, self.deliveries.all().values_list('quantity', flat=True), 0)
 
 	@property
 	def get_is_complete(self):

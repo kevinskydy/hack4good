@@ -26,17 +26,17 @@ Causes
 			</div>
 			<br />
 			<div>
-				Time Remaining: TODO{{ goal.remaining_time }}
-			</div>
-			<div>
 				<h4>Goals</h4> 
 				{% for goal in ctr.goal_set.all %}
 					<h5>{{ goal.target_date }}</h5>
+					<div>
+						Time Remaining: {{ goal.get_remaining_time }}
+					</div>
 					Items:
 					<ul>
 					{% for item in goal.item_set.all %}
 						<li>
-							{{ item.item_type.name }} - <strong>TODO{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</li>
+							{{ item.item_type.name }} - <strong>{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</li>
 					{% endfor %}
 					</ul>
 					<br />
