@@ -8,6 +8,7 @@ Causes
 	<div class="row">
 		<h1>{{ cause.name }}</h1>
 	</div>
+	<hr />
 	{% for ctr in centers %}
 	<div class='row'>
 		<div class='col-md-6'>
@@ -39,13 +40,23 @@ Causes
 							{{ item.item_type.name }} - <strong>{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</li>
 					{% endfor %}
 					</ul>
+					 <div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-type="button_count"></div>
 					<br />
 				{% endfor %}
 			</div>
 		</div>
 		<div class="col-md-6">
-			FB Comments: TODO
+			<div class="fb-comments" data-href="{{ request.get_host }}{% url "goal_index" ctr.id %}" data-numposts="10"></div>
 		</div>
   </div>
+	<hr />	
 	{% endfor %}	
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=369124419889540";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 {% endblock container %}
