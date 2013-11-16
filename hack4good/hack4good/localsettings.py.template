@@ -1,0 +1,13 @@
+# Database
+# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'hack4good',
+        'USER': 'postgres', 
+        'PASSWORD': 'pa55w0rd', 
+        'PORT': 5432
+        'HOST': 'localhost'
+    }
+}
