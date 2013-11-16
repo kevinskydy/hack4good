@@ -1,5 +1,22 @@
 {% extends 'relief/base.html' %}
+{% load staticfiles %}
 
-{% block body %}
-	{{ goals }}
-{% endblock body %}
+{% block extra_css %}
+  <link type='text/css' rel='stylesheet' href='{% static "Calendario/css/calendar.css" %}' >
+  <link type='text/css' rel='stylesheet' href='{% static "Calendario/css/custom_1.css" %}' >
+{% endblock extra_css %}
+
+{% block extra_js %}
+  <script type='text/javascript' src='{% static "Calendario/js/jquery.calendario.js" %}'></script>
+  <script type='text/javascript'>
+    $(function () {
+      $('#calendar').calendario();
+    });
+  </script>
+{% endblock extra_js %}
+
+{% block container %}
+  <div id='calendar'>
+  </div>
+  {{ goals }}
+{% endblock container %}

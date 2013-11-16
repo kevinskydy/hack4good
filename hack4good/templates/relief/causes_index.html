@@ -21,7 +21,7 @@ Causes
 		<div class='col-xs-4'>
 			<h2>
 				<!-- TODO: Generate url properly! -->
-				<a href='/relief/relief_centers/{{ cause.id }}'>
+				<a href='{% url "relief_center_index" cause.id %}'>
 					{{ cause.name }}
 				</a>
 			</h2>
