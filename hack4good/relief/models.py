@@ -84,7 +84,7 @@ class Item(models.Model):
 
 	@property
 	def get_is_complete(self):
-		return self.get_total_delivered() == self.quota
+		return self.percent_complete >= 100.0
 
 	def __unicode__(self):
 		return "%s: %s - %d" % (self.goal, self.item_type, self.quota)

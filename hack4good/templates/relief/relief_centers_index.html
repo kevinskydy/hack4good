@@ -33,11 +33,11 @@ Causes
 						<a href="{% url "goal_view" goal.id %}">
 							{{ goal.target_date }}
 						</a> - 
-						{% if goal.get_is_complete %}
-						<span class="green">Complete</span>
-					{% else %}
-						<span class="red">Incomplete</span>
-					{% endif %}
+						{% if goal.get_is_completed %}
+							<span class="green">Complete</span>
+						{% else %}
+							<span class="red">Incomplete</span>
+						{% endif %}
 					</h5>
 					<div>
 						Time Remaining: {{ goal.get_remaining_time }}
@@ -46,7 +46,12 @@ Causes
 					<ul>
 					{% for item in goal.items.all %}
 						<li>
-							{{ item.item_type.name }} - <strong>{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</li>
+							{% if item.get_is_complete %}
+								<span class="green">{{ item.item_type.name }} - <strong>{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</span>
+							{% else %}
+								<span class="red">{{ item.item_type.name }} - <strong>{{ item.get_total_delivered }}</strong> of <strong>{{ item.quota }}</strong> delivered</span>
+							{% endif %}
+						</li>
 					{% endfor %}
 					</ul>
 					<div class="fb-share-button" data-href="{{ base_url }}{% url "goal_view" goal.id %}" data-type="button_count"></div>
