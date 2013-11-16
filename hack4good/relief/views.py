@@ -12,6 +12,7 @@ class ReliefCentersIndexView(View):
 	def get(self, request, *args, **kwargs):
 		cause = Cause.objects.get(id=kwargs['cause_id'])
 		return render(request, 'relief/relief_centers_index.html', {
+			'cause': cause,
 			'centers': cause.reliefcenter_set.all()
 		})
 

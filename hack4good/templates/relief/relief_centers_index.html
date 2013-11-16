@@ -5,6 +5,9 @@ Causes
 {% endblock page_sub_title %}
 
 {% block container %}
+	<div>
+		<h1>{{ cause.name }}</h1>
+	</div>
 	{% for ctr in centers %}
 	<div class='row'>
 		<div class='col-md-6'>
@@ -41,7 +44,7 @@ Causes
 			</div>
 		</div>
 		<div class="col-md-6">
-			fb comments
+			FB Comments: TODO
 		</div>
   </div>
 	{% endfor %}	
